@@ -140,7 +140,8 @@ class DatePicker extends Component {
         () => ({ showIOSModal: false }),
         () => {
           const { onDateChanged } = this.props
-          onDateChanged(this.getDateObj())
+          Platform.OS === 'ios' && !this.state.date ? this.setState({date: new Date()}, () => onDateChanged(this.getDateObj())) : onDateChanged(this.getDateObj())
+
         }
       )
     }
